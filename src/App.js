@@ -16,6 +16,7 @@ class App extends React.Component {
       stateTrunfo: false,
       isSaveButtonDisabled: true,
       savelist: [],
+      hasTrunfo: false,
     };
   }
 
@@ -30,6 +31,7 @@ class App extends React.Component {
       stateRare,
       // stateTrunfo,
       // isSaveButtonDisabled,
+      // hasTrunfo
     } = this.state;
     this.setState({
       isSaveButtonDisabled:
@@ -116,6 +118,8 @@ class App extends React.Component {
         stateAttr2: '0',
         stateAttr3: '0',
         stateRare: '',
+        hasTrunfo: prevState.stateTrunfo,
+        stateTrunfo: false,
       };
     });
   };
@@ -131,6 +135,7 @@ class App extends React.Component {
       stateRare,
       stateTrunfo,
       isSaveButtonDisabled,
+      hasTrunfo,
     } = this.state;
     return (
       <div>
@@ -143,6 +148,7 @@ class App extends React.Component {
           cardAttr3={ stateAttr3 }
           cardRare={ stateRare }
           cardTrunfo={ stateTrunfo }
+          hasTrunfo={ hasTrunfo }
           onInputChange={ this.onInputChange }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onSaveButtonClick={ this.onSaveButtonClick }

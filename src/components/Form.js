@@ -13,14 +13,14 @@ export default class Form extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      // hasTrunfo,
+      hasTrunfo,
       isSaveButtonDisabled,
       onInputChange,
       onSaveButtonClick,
     } = this.props;
     return (
       <form className="form">
-        <label htmlFor>
+        <label htmlFor="nome">
           Nome:
           <input
             type="text"
@@ -106,17 +106,21 @@ export default class Form extends React.Component {
           </select>
         </label>
 
-        <label htmlFor="checkbox">
-          <input
-            type="checkbox"
-            name="stateTrunfo"
-            data-testid="trunfo-input"
-            id="checkbox"
-            checked={ cardTrunfo }
-            onChange={ onInputChange }
-          />
-          Super Trybe Trunfo Card
-        </label>
+        {hasTrunfo ? (
+          <span>Você já tem um Super Trunfo em seu baralho</span>
+        ) : (
+          <label htmlFor="checkbox">
+            <input
+              type="checkbox"
+              name="stateTrunfo"
+              data-testid="trunfo-input"
+              id="checkbox"
+              checked={ cardTrunfo }
+              onChange={ onInputChange }
+            />
+            Super Trybe Trunfo Card
+          </label>
+        )}
 
         <button
           type="button"
