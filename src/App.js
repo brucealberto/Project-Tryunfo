@@ -6,47 +6,109 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      textName: '',
-      textDescription: '',
-      textImage: '',
-      textAttr1: '',
-      textAttr2: '',
-      textAttr3: '',
-      textRare: '',
-      textTrunfo: false,
+      stateName: '',
+      stateDescription: '',
+      stateImage: '',
+      stateAttr1: '0',
+      stateAttr2: '0',
+      stateAttr3: '0',
+      stateRare: '',
+      stateTrunfo: false,
+      isSaveButtonDisabled: true,
     };
-    this.onInputChange = this.onInputChange.bind(this);
   }
 
-  onInputChange({ target }) {
+  handleValidation = () => {
+    const {
+      stateName,
+      stateDescription,
+      stateImage,
+      stateAttr1,
+      stateAttr2,
+      stateAttr3,
+      stateRare,
+      stateTrunfo,
+      isSaveButtonDisabled,
+    } = this.state;
+    this.setState({
+      isSaveButtonDisabled:
+        this.handleInputValidation(
+          stateName,
+          stateDescription,
+          stateImage,
+          stateRare,
+        ) || this.handleSum(stateAttr1, stateAttr2, stateAttr3),
+    });
+  };
+
+  handleInputValidation = (
+    stateName,
+    stateDescription,
+    stateImage,
+    stateRare,
+  ) => {
+    if (
+      stateName !== ''
+      && stateDescription !== ''
+      && stateImage !== ''
+      && stateRare !== ''
+    ) {
+      return false;
+    }
+    return true;
+  };
+
+  handleSum = (stateAttr1, stateAttr2, stateAttr3) => {
+    const maxSum = 210;
+    const maxNumber = 90;
+    if (
+      Number(stateAttr1) + Number(stateAttr2) + Number(stateAttr3) <= maxSum
+      && Number(stateAttr1) <= maxNumber
+      && Number(stateAttr2) <= maxNumber
+      && Number(stateAttr3) <= maxNumber
+      && Number(stateAttr1) >= 0
+      && Number(stateAttr2) >= 0
+      && Number(stateAttr3) >= 0
+    ) {
+      return false;
+    }
+    return true;
+  };
+
+  onInputChange = ({ target }) => {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({ [name]: value });
-  }
+    this.setState({ [name]: value }, this.handleValidation);
+  };
 
   render() {
     const {
-      textName,
-      textDescription,
-      textImage,
-      textAttr1,
-      textAttr2,
-      textAttr3,
-      textRare,
-      textTrunfo,
+      stateName,
+      stateDescription,
+      stateImage,
+      stateAttr1,
+      stateAttr2,
+      stateAttr3,
+      stateRare,
+      stateTrunfo,
+      isSaveButtonDisabled,
     } = this.state;
     return (
       <div>
-        <Form cardName={ textName } onInputChange={ this.onInputChange } />
+        <Form
+          cardName={ stateName }
+          onInputChange={ this.onInputChange }
+          isSaveButtonDisabled={ isSaveButtonDisabled }
+        />
         <Card
-          cardName={ textName }
-          cardDescription={ textDescription }
-          cardImage={ textImage }
-          cardAttr1={ textAttr1 }
-          cardAttr2={ textAttr2 }
-          cardAttr3={ textAttr3 }
-          cardRare={ textRare }
-          cardTrunfo={ textTrunfo }
+          cardName={ stateName }
+          cardDescription={ stateDescription }
+          cardImage={ stateImage }
+          cardAttr1={ stateAttr1 }
+          cardAttr2={ stateAttr2 }
+          cardAttr3={ stateAttr3 }
+          cardRare={ stateRare }
+          cardTrunfo={ stateTrunfo }
         />
       </div>
     );
