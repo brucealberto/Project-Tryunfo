@@ -27,8 +27,8 @@ class App extends React.Component {
       stateAttr2,
       stateAttr3,
       stateRare,
-      stateTrunfo,
-      isSaveButtonDisabled,
+      // stateTrunfo,
+      // isSaveButtonDisabled,
     } = this.state;
     this.setState({
       isSaveButtonDisabled:

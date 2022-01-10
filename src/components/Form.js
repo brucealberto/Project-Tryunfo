@@ -115,7 +115,7 @@ export default class Form extends React.Component {
             checked={ cardTrunfo }
             onChange={ onInputChange }
           />
-          Super Trybe Trunfo
+          Super Trybe Trunfo Card
         </label>
 
         <button
